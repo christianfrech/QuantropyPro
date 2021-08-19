@@ -257,26 +257,7 @@ class Adj_Mats(object):
                         # No interation
                         else:
                             self.adjacency_graphs[frame][i][j] = 0
-                    
-
-                    '''
-                    WATER ADJACENCY
-                    '''
-
-                    '''
-                    if (i//3==j//3):
-                        self.adjacency_graphs[frame][i][j]=1
-                    elif ((self.valence_list[frame][i]==self.valence_list[frame][j])):
-                        self.adjacency_graphs[frame][i][j]=0
-                    elif ((self.valence_list[frame][i]!=self.valence_list[frame][j]) & (self.adjacency_graphs[frame][i][j]==1)):
-                        self.adjacency_graphs[frame][i][j]=1
-                        if (i,j) not in used_valence_list:
-                            hydrogenbond_count+=1
-                        else: 
-                            pass
-                    else:
-                        self.adjacency_graphs[frame][i][j]=0
-                    '''
+                 
 
         ### PEPTIDE TEST CASES ###
         print('testing')
@@ -312,7 +293,6 @@ class Adj_Mats(object):
         return self.adjacency_graphs
 
         def get_elec_adj(self):
-        #if len(self.adjacency_graphs) == 1:
         self.get_atom_adj(lowerlimit,upperlimit)
             
         total_val = 0
@@ -359,7 +339,6 @@ class Adj_Mats(object):
         return batch_entropies
 
     def make_eigenvalues(self, hamiltonian_iter=1000):
-        #self.elec_adjacency_graphs=[]
         self.elec_adjacency_graphs=cp.array(self.get_elec_adj())
         elec_count = len(self.elec_adjacency_graphs[0])
         self.eigenvalues = cp.zeros((len(self.elec_adjacency_graphs), hamiltonian_iter, elec_count))
@@ -380,15 +359,12 @@ class Adj_Mats(object):
                 for value in range(len(eigs)):
                     self.eigenvalues[frame][i][value] = eigs[value]
                 cp.cuda.Stream.null.synchronize()
-            #self.eigenvalues[frame] = frame_eigs
         return self.eigenvalues
 
     def get_spacings(self,types):
         eigenvalues = self.make_eigenvalues()
         allframes_spacing=cp.zeros(len(eigenvalues), len(eigenvalues[0]))
-        #eigenvalues=[np.random.rand(1000,60)]
         eigenvalues=cp.asnumpy(eigenvalues)
-        #cp.cuda.Stream.null.synchronize()
         if types=='all':
             medians=[]
             nexttomedian=[]
