@@ -17,60 +17,62 @@ if _version_extra:
 
 __version__ = '.'.join(map(str, _ver))
 
-CLASSIFIERS = ["Development Status :: 3 - Alpha",
+CLASSIFIERS = ["Development Status :: 1 - Alpha",
                "Environment :: Console",
                "Intended Audience :: Science/Research",
                "License :: OSI Approved :: MIT License",
                "Operating System :: OS Independent",
                "Programming Language :: Python",
-               "Topic :: Scientific/Engineering"]
+               "Topic :: Protien folding prediction"]
 
 # Description should be a one-liner:
-description = "shablona: a template for small scientific Python projects"
+description = "Creates visuals of entropy characterizations using quantum-classical hybrid model of peptide folding"
 # Long description will go up on the pypi page
 long_description = """
 
-Shablona
+QuantropyPro
 ========
-Shablona is a template project for small scientific Python projects.
+QuantropyPro is a package of python functions which allows the user to analyze
+the time evolution of a peptide-solvent system given a PDB file. This process
+includes generating adjacency matrices and analyze the Gaussian Orthogonal 
+Ensemble spectral statistics and calculate the continuous differnetial entropy
+to track the convergence of a system upon energetic equilibrium.
 
-It contains software implementations of an analysis of some simple data, but
-more importantly, it contains infrastructure for testing, documentation,
-continuous integration and deployment, which can be easily adapted
-to use in other projects.
+The package includes a class of methods for parsing a PDB file and generating
+the atomic and electronic adjacency matrices based upon interatomic
+interactions, as well as calculating the associated eigenvalues and spacings,
+along with the continuous differential entropy of the system at a given state.
+There are also several functions for generating bins and placing values into
+bins for probability density distributions. 
 
-To get started using these components in your own software, please go to the
+As examples of use of the methods, the programs used for the calculation of
+figures in the paper "Quantum-Classical Hybrid Model for Peptide Folding 
+and Resultant Entropic Behavior" are included with annotations for use.
+
+To get started using these modules in your own projects, please go to the
 repository README_.
 
 .. _README: https://github.com/uwescience/shablona/blob/master/README.md
 
-License
-=======
-``shablona`` is licensed under the terms of the MIT license. See the file
-"LICENSE" for information on the history of this software, terms & conditions
-for usage, and a DISCLAIMER OF ALL WARRANTIES.
 
-All trademarks referenced herein are property of their respective holders.
-
-Copyright (c) 2015--, Ariel Rokem, The University of Washington
-eScience Institute.
+Copyright (c) 2021--, Christian Frech
 """
 
-NAME = "shablona"
-MAINTAINER = "Ariel Rokem"
-MAINTAINER_EMAIL = "arokem@gmail.com"
+NAME = "QuantropyPro"
+MAINTAINER = "Christian Frech"
+MAINTAINER_EMAIL = "cfrech@andrew.cmu.edu"
 DESCRIPTION = description
 LONG_DESCRIPTION = long_description
 URL = "http://github.com/uwescience/shablona"
 DOWNLOAD_URL = ""
 LICENSE = "MIT"
-AUTHOR = "Ariel Rokem"
-AUTHOR_EMAIL = "arokem@gmail.com"
+AUTHOR = "Christian Frech"
+AUTHOR_EMAIL = "cfrech@andrew.cmu.edu"
 PLATFORMS = "OS Independent"
 MAJOR = _version_major
 MINOR = _version_minor
 MICRO = _version_micro
 VERSION = __version__
-PACKAGE_DATA = {'shablona': [pjoin('data', '*')]}
-REQUIRES = ["numpy"]
-PYTHON_REQUIRES = ">= 3.5"
+PACKAGE_DATA = {'quantropypro': [pjoin('data', '*')]}
+REQUIRES = ["numpy", "cupy", "os", "sys", "matplotlib"]
+PYTHON_REQUIRES = ">= 3.7"
