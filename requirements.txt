@@ -1,4 +1,5 @@
 numpy
-scipy
+os
+sys
 matplotlib
-pandas
+math
